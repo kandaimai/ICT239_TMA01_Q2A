@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="title icon" href="{{ url_for('static', filename='img/title-img.png')}}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -18,11 +18,10 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/custom.css">
 
-    <title>Book List</title>
-
+  <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <!-- navbar -->
+  <!-- navbar -->
   <nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -33,10 +32,11 @@
           <!-- sidebar -->
           <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
             <a href="#" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">
-                SG Library </a>
+              SG Library </a>
             <ul class="navbar-nav flex-column mt-4">
-                <li class="nav-item"><a href="/" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book text-light fa-lg mr-3"></i>Book Titles</a></li>
-          </ul>
+              <li class="nav-item"><a href="/" class="nav-link text-white p-3 mb-2 sidebar-link"><i
+                    class="fas fa-book text-light fa-lg mr-3"></i>Book Titles</a></li>
+            </ul>
           </div>
           <!-- end of sidebar -->
 
@@ -54,25 +54,9 @@
     </div>
   </nav>
   <!-- end of navbar -->
-    <h1>Book Catalog</h1>
-    <div class="book-container">
-        {% for book in books %}
-        <div class="book-card">
-            <img src="{{ book.url }}" alt="{{ book.title }} cover">
-            <h2>{{ book.title }}</h2>
-            <p class="authors"><strong>Authors:</strong> {{ book.authors | join(', ') }}</p>
-            <p class="genres"><strong>Genres:</strong> {{ book.genres | join(', ') }}</p>
-            <p><strong>Category:</strong> {{ book.category }}</p>
-            <p><strong>Pages:</strong> {{ book.pages }}</p>
-            <p class="availability {% if book.available > 0 %}available{% endif %}">
-                <strong>Available:</strong> {{ book.available }} of {{ book.copies }} copies
-            </p>
-            <p><strong>Description:</strong></p>
-            {% for desc in book.description %}
-                <p>{{ desc }}</p>
-            {% endfor %}
-        </div>
-        {% endfor %}
-    </div>
+
+  <!-- Content block for child templates -->
+  {% block content %}
+  {% endblock %}
 </body>
 </html>
