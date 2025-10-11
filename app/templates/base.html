@@ -41,12 +41,14 @@
           <!-- end of sidebar -->
 
           <!-- top-nav -->
-          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-info fixed-top py-4 top-navbar">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-4 top-navbar">
+            {% block header %}
             <div class="row align-items-center">
               <div class="col-md-4">
-                <h4 class="text-light text-uppercase mb-0">BOOK TITLES</h4>
+                <h4>BOOK TITLES</h4>
               </div>
             </div>
+            {% endblock %}
           </div>
           <!-- end of top-nav -->
         </div>

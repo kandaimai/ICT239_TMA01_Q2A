@@ -10,9 +10,16 @@ def list_books():
         return render_template('book_list.html', books=all_books)
     elif request.method == 'POST':
         cat = request.form['cat']
-        filtered_books = [book for book in all_books if book['category'] ==  cat]
-        #return cat
-        return render_template('book_list.html', books=filtered_books)
+        if cat == 'All':
+            return render_template('book_list.html', books=all_books)
+        else:
+            filtered_books = [book for book in all_books if book['category'] ==  cat]
+            return render_template('book_list.html', books=filtered_books)
+
+@app.route('/book_detail/<title>', methods = ['POST', 'GET'])
+def book_detail(title):
+    return render_template('book_detail.html', books=all_books, title = title)
+
 
 '''
 @app.route('/book_cat/', methods = ['GET', 'POST'])

@@ -6,12 +6,13 @@
 <section>
     <div class="container-fluid">
         <div
-            class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-info fixed-top py-1 top-searchbar d-flex justify-content-between">
+            class="col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-0 top-searchbar d-flex justify-content-between">
             <p><strong>Number of titles:</strong></p>
             <div class="d-flex">
                 <p><strong>Category</strong></p>
                 <form action="/" method="post">
                     <select id="category" name="cat">
+                        <option value="All">All</option>
                         <option value="Teens">Teens</option>
                         <option value="Adult">Adult</option>
                         <option value="Children">Children</option>
@@ -23,24 +24,26 @@
         <div class="row">
             <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                 {% for book in books|sort(attribute='title') %}
-                <div class="book-container">
-                    <div class="book-card d-flex flex-column flex-lg-row">
-                        <div class="col-lg-6">
-                            <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid">
+                <div class="book-container w-100 overflow-auto">
+                    <div class="book-card position-relative">
+                        <div class = 'd-flex flex-column flex-lg-row'>
+                            <div class="col-lg-2">
+                                <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid">
+                            </div>
+                            <div class="col-lg-10">
+                                <h2>{{ book.title }}</h2>
+                                <h2>By {{ book.authors | join(', ') }}</h2>
+                                <p class="genres">Category: {{ book.category }} {{ book.genres | join(', ') }}</p>
+                                <p>Pages: {{ book.pages }}</p>
+                                <p>{{ book.description[0] }}</p>
+                                <p>{{ book.description[-1] }}</p>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <h2>{{ book.title }}</h2>
-                            <p class="authors">By {{ book.authors | join(', ') }}</p>
-                            <p class="genres">Category: {{ book.category }} {{ book.genres | join(', ') }}</p>
-                            <p><strong>Pages:</strong> {{ book.pages }}</p>
-                            <p class="availability {% if book.available > 0 %}available{% endif %}">
-                                <strong>Available:</strong> {{ book.available }} of {{ book.copies }} copies
-                            </p>
-                            <p><strong>Description:</strong></p>
-                            {% for desc in book.description %}
-                            <p>{{ desc }}</p>
-                            {% endfor %}
-                        </div>
+                        <a href="/book_detail/{{book.title}}" class = "btn btn-success btn-sm text-white text-decoration-none rounded"> 
+                            More Details 
+                        </a>
+                    </div>
+                    <div>
                     </div>
                 </div>
 

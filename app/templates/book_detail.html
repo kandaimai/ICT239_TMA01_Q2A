@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block header %}BOOK DETAIL{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                {% for book in books %}
+                    {% if book.title == title %}
+                        <div class="book-container w-100 overflow-auto">
+                            <div class="book-card position-relative">
+                                <div class = 'd-flex flex-column flex-lg-row'>
+                                    <div class="col-lg-2">
+                                        <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid">
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <h2>{{ book.title }}</h2>
+                                        <h2>By {{ book.authors | join(', ') }}</h2>
+                                        <p class="genres">Category: {{ book.category }} {{ book.genres | join(', ') }}</p>
+                                        <p>Pages: {{ book.pages }}</p>
+                                        <p>Copies: <strong>{{book.copies}}</strong> Available: <strong>{{book.available}}</strong></p>
+                                        {% for desc in book.description %}
+                                            <p>
+                                                {{ desc }}
+                                            </p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
